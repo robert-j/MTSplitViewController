@@ -71,7 +71,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="MTSplitViewLib\MTSplitView\MTSplitViewLib.csproj">
+    <ProjectReference Include="..\MTSplitViewLib\MTSplitViewLib\MTSplitViewLib.csproj">
       <Project>{86B4F178-F272-4404-8CF5-140A5A84CBC2}</Project>
       <Name>MTSplitViewLib</Name>
     </ProjectReference>
