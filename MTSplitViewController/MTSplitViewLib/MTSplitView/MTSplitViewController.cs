@@ -13,7 +13,7 @@ using MonoTouch.Foundation;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace MTSplitView
+namespace MTSplitViewLib
 {
 	public class MTSplitViewController : UIViewController
 	{
