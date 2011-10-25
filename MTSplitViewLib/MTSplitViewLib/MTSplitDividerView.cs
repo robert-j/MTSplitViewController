@@ -235,7 +235,7 @@ namespace MTSplitViewLib
 			set;
 		}
 		
-		public bool AllowsDragging
+		public virtual bool AllowsDragging
 		{
 			get
 			{
