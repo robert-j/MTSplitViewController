@@ -9,7 +9,7 @@
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using MTSplitView;
+using MTSplitViewLib;
 
 namespace MTSplitViewControllerDemo
 {

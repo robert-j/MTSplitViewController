@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MTSplitViewController/MTSplitView/MTSplitViewController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MTSplitViewController/DetailViewController.cs">
     <Files>
+      <File FileName="../../MTSplitCornersView.cs" Line="1" Column="1" />
       <File FileName="../BrainloopMobile106/iBrainloop/Views/TileView/TileViewBase.cs" Line="1" Column="1" />
       <File FileName="../BrainloopMobile106/iBrainloop/Views/InputAlertView.cs" Line="1" Column="1" />
       <File FileName="../BrainloopMobile106/iBrainloop/Controllers/PdfViewer/PdfViewerController.cs" Line="1" Column="1" />
@@ -9,25 +10,22 @@
       <File FileName="../BrainloopMobile106/iBrainloop/Controllers/PdfViewer/IndexView/PdfIndexScrollView.cs" Line="1" Column="1" />
       <File FileName="../BrainloopMobile106/iBrainloop/Controllers/TileViewController/TileViewScrollView.cs" Line="1" Column="1" />
       <File FileName="../BrainloopMobile106/iBrainloop/Controllers/TileViewController/TileViewController.cs" Line="1" Column="1" />
-      <File FileName="MTSplitViewController/AppDelegate.cs" Line="49" Column="4" />
-      <File FileName="MTSplitViewController/RootViewController.cs" Line="15" Column="2" />
-      <File FileName="MTSplitViewController/DetailViewController.cs" Line="14" Column="18" />
-      <File FileName="../../MTSplitCornersView.cs" Line="1" Column="1" />
+      <File FileName="MTSplitViewController/AppDelegate.cs" Line="12" Column="21" />
+      <File FileName="MTSplitViewController/RootViewController.cs" Line="1" Column="1" />
+      <File FileName="MTSplitViewController/DetailViewController.cs" Line="18" Column="5" />
       <File FileName="MTSplitViewController/Main.cs" Line="1" Column="1" />
       <File FileName="MTSplitViewController/Info.plist" />
-      <File FileName="MTSplitViewController/MTSplitView/MTSplitCornersView.cs" Line="16" Column="22" />
-      <File FileName="MTSplitViewController/MTSplitView/MTSplitDividerView.cs" Line="16" Column="22" />
-      <File FileName="MTSplitViewController/MTSplitView/MTSplitViewController.cs" Line="1237" Column="3" />
-      <File FileName="MTSplitViewController/README.markdown" Line="24" Column="9" />
+      <File FileName="MTSplitViewController/MTSplitViewLib/MTSplitView/MTSplitCornersView.cs" Line="16" Column="25" />
+      <File FileName="MTSplitViewController/MTSplitViewLib/MTSplitView/MTSplitDividerView.cs" Line="16" Column="25" />
+      <File FileName="MTSplitViewController/MTSplitViewLib/MTSplitView/MTSplitViewController.cs" Line="15" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="MTSplitViewController" expanded="True">
-            <Node name="MTSplitView" expanded="True">
-              <Node name="MTSplitViewController.cs" selected="True" />
-            </Node>
+            <Node name="References" expanded="True" />
           </Node>
+          <Node name="MTSplitViewLib" expanded="True" selected="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">

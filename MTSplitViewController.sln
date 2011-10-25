@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSplitViewController", "MTSplitViewController\MTSplitViewController.csproj", "{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSplitViewLib", "MTSplitViewController\MTSplitViewLib\MTSplitView\MTSplitViewLib.csproj", "{86B4F178-F272-4404-8CF5-140A5A84CBC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -11,6 +13,14 @@ Global
 		Release|iPhone = Release|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhone.Build.0 = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhone.Build.0 = Debug|iPhone
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
