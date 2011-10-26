@@ -262,7 +262,7 @@ namespace MTSplitViewLib
 			{
 				// Check to see if delegate wishes to constrain the position.
 				bool bConstrained = false;
-				SizeF oFullSize = this.SplitViewSizeForOrientation (this.InterfaceOrientation);
+				SizeF oFullSize = this.SplitViewRectangleForOrientation (this.InterfaceOrientation).Size;
 				float fNewPos = value;
 				if (this.ConstrainSplitPosition != null)
 				{
@@ -900,24 +900,24 @@ namespace MTSplitViewLib
 		}
 		
 		/// <summary>
-		/// Gets the split view size for a sepcific orientation.
+		/// Gets the rectangle that will be used to place the master and detail controller in for a sepcific orientation.
+		/// Takes care of status bar. You can override this if you don't want to use the full screen to be used for the split controller.
 		/// </summary>
 		/// <returns>
-		/// The view size for orientation.
+		/// The rectangle for the requested orientation.
 		/// </returns>
 		/// <param name='theOrientation'>
 		/// The orientation.
 		/// </param>
-		protected virtual SizeF SplitViewSizeForOrientation (UIInterfaceOrientation theOrientation)
+		protected virtual RectangleF SplitViewRectangleForOrientation (UIInterfaceOrientation theOrientation)
 		{
-			UIScreen oScreen = UIScreen.MainScreen;
-			RectangleF oFullScreenRect = oScreen.Bounds; // always implicitly in Portrait orientation.
-			RectangleF oAppFrame = oScreen.ApplicationFrame;
+			RectangleF oFullScreenRect = UIScreen.MainScreen.Bounds; // always implicitly in Portrait orientation.
+			RectangleF oAppFrame = UIScreen.MainScreen.ApplicationFrame;
 	
 			// Find status bar height by checking which dimension of the applicationFrame is narrower than screen bounds.
 			// Little bit ugly looking, but it'll still work even if they change the status bar height in future.
 			float fStatusBarHeight = Math.Max ((oFullScreenRect.Width - oAppFrame.Width), (oFullScreenRect.Height - oAppFrame.Height));
-	
+			
 			// Initially assume portrait orientation.
 			float fWidth = oFullScreenRect.Width;
 			float fHeight = oFullScreenRect.Height;
@@ -932,7 +932,7 @@ namespace MTSplitViewLib
 			// Account for status bar, which always subtracts from the height (since it's always at the top of the screen).
 			fHeight -= fStatusBarHeight;
 	
-			return new SizeF (fWidth, fHeight);
+			return new RectangleF (0, 0, fWidth, fHeight);
 		}
 		
 		/// <summary>
@@ -947,7 +947,8 @@ namespace MTSplitViewLib
 	
 			// Layout the master, detail and divider views appropriately, adding/removing subviews as needed.
 			// First obtain relevant geometry.
-			SizeF oFullSize = this.SplitViewSizeForOrientation (eOrientation);
+			RectangleF oMainRect = this.SplitViewRectangleForOrientation (eOrientation);
+			SizeF oFullSize = oMainRect.Size;
 			float width = oFullSize.Width;
 			float height = oFullSize.Height;
 	
@@ -956,7 +957,7 @@ namespace MTSplitViewLib
 #endif
 			
 			// Layout the master, divider and detail views.
-			RectangleF eNewFrame = new RectangleF (0, 0, width, height);
+			RectangleF eNewFrame = oMainRect;// new RectangleF (0, 0, width, height);
 			UIViewController oController;
 			UIView oView = null;
 			bool bShouldShowMaster = this.ShouldShowMasterForInterfaceOrientation (eOrientation);
@@ -1185,17 +1186,49 @@ namespace MTSplitViewLib
 				// left/right split
 				fCornersWidth = (fRadius * 2.0f) + this.SplitWidth;
 				fCornersHeight = fRadius;
-				fX = ((bShouldShowMaster) ? ((bMasterFirst) ? this.SplitPosition : width - (this.SplitPosition + this.SplitWidth)) : (0 - this.SplitWidth)) - fRadius;
-				fY = 0;
+				if (bShouldShowMaster)
+				{
+					if (bMasterFirst)
+					{
+						fX = this.SplitPosition;
+					}
+					else
+					{
+						fX = width - (this.SplitPosition + this.SplitWidth);
+					}
+				}
+				else
+				{
+					fX = 0 - this.SplitWidth;
+				}
+				fX -= fRadius;
+				fY = oMainRect.Top;
 				oLeadingRect = new RectangleF (fX, fY, fCornersWidth, fCornersHeight); // top corners
-				oTrailingRect = new RectangleF (fX, (height - fCornersHeight), fCornersWidth, fCornersHeight); // bottom corners
+				oTrailingRect = new RectangleF (fX, (height - fCornersHeight) + oMainRect.Top, fCornersWidth, fCornersHeight); // bottom corners
 		
 			}
 			else
 			{
 				// top/bottom split
 				fX = 0;
-				fY = ((bShouldShowMaster) ? ((bMasterFirst) ? this.SplitPosition : height - (this.SplitPosition + this.SplitWidth)) : (0 - this.SplitWidth)) - fRadius;
+				fY = 0;
+				if(bShouldShowMaster)
+				{
+					if(bMasterFirst)
+					{
+						fY = this.SplitPosition;
+					}
+					else
+					{
+						fY = height - (this.SplitPosition + this.SplitWidth);
+					}
+				}
+				else
+				{
+					fY = 0 - this.SplitWidth;
+				}
+				fY -= fRadius;
+				fY += oMainRect.Top;
 				fCornersWidth = fRadius;
 				fCornersHeight = (fRadius * 2.0f) + this.SplitWidth;
 				oLeadingRect = new RectangleF (fX, fY, fCornersWidth, fCornersHeight); // left corners
