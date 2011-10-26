@@ -563,7 +563,10 @@ namespace MTSplitViewLib
 				}
 	
 				// Update divider and corners.
-				this.DividerView.SetNeedsDisplay ();
+				if(this.DividerView != null)
+				{
+					this.DividerView.SetNeedsDisplay ();
+				}
 				if (this.CornerViews != null)
 				{
 					foreach (MTSplitCornersView corner in this.CornerViews)
@@ -828,12 +831,12 @@ namespace MTSplitViewLib
 			}
 		}
 		
-		private void LayoutSubviewsWithAnimation (bool animate)
+		protected virtual void LayoutSubviewsWithAnimation (bool animate)
 		{
 			this.LayoutSubviewsForInterfaceOrientation (this.InterfaceOrientation, animate);
 		}
 
-		private void LayoutSubviews ()
+		protected virtual void LayoutSubviews ()
 		{
 			this.LayoutSubviewsForInterfaceOrientation (this.InterfaceOrientation, true);
 		}
@@ -905,7 +908,7 @@ namespace MTSplitViewLib
 		/// <param name='theOrientation'>
 		/// The orientation.
 		/// </param>
-		private SizeF SplitViewSizeForOrientation (UIInterfaceOrientation theOrientation)
+		protected virtual SizeF SplitViewSizeForOrientation (UIInterfaceOrientation theOrientation)
 		{
 			UIScreen oScreen = UIScreen.MainScreen;
 			RectangleF oFullScreenRect = oScreen.Bounds; // always implicitly in Portrait orientation.
@@ -920,7 +923,7 @@ namespace MTSplitViewLib
 			float fHeight = oFullScreenRect.Height;
 	
 			// Correct for orientation.
-			if (UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeLeft || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeRight)
+			if (theOrientation== UIInterfaceOrientation.LandscapeLeft || theOrientation == UIInterfaceOrientation.LandscapeRight)
 			{
 				fWidth = fHeight;
 				fHeight = oFullScreenRect.Width;
@@ -935,7 +938,7 @@ namespace MTSplitViewLib
 		/// <summary>
 		/// Layouts the subviews.
 		/// </summary>
-		private void LayoutSubviewsForInterfaceOrientation (UIInterfaceOrientation eOrientation, bool animate)
+		protected virtual void LayoutSubviewsForInterfaceOrientation (UIInterfaceOrientation eOrientation, bool animate)
 		{
 			if (this.bReconfigurePopup)
 			{
@@ -1110,7 +1113,7 @@ namespace MTSplitViewLib
 				}
 		
 				// Position divider.
-				if (oView != null)
+				if (oView != null && this.DividerView != null)
 				{
 					oView = this.DividerView;
 					oView.Frame = oDividerRect;
@@ -1215,6 +1218,11 @@ namespace MTSplitViewLib
 					this.View.BringSubviewToFront (oLeadingCorners);
 					this.View.BringSubviewToFront (oTrailingCorners);
 				}
+			}
+			
+			if(this.DividerView != null && this.DividerView.Superview != null)
+			{
+				this.DividerView.Superview.BringSubviewToFront(this.DividerView);
 			}
 		}
 		

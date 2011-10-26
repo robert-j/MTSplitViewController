@@ -229,7 +229,7 @@ namespace MTSplitViewLib
 			}
 		}
 		
-		public MTSplitViewController SplitViewController
+		public virtual MTSplitViewController SplitViewController
 		{
 			get;
 			set;
