@@ -451,6 +451,11 @@ namespace MTSplitViewLib
 					return;
 				}
 				
+				if(this.ViewControllers[0] != null)
+				{
+					this.ViewControllers[0] .View.RemoveFromSuperview();
+				}
+				
 				this.ViewControllers [0] = value;
 				this.LayoutSubviews ();
 			}
