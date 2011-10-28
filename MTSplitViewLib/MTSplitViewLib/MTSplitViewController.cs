@@ -1054,6 +1054,7 @@ namespace MTSplitViewLib
 					if (oView != null)
 					{
 						oView.Frame = oDetailRect;
+						oController.ViewWillAppear(false);
 						if (oView.Superview == null)
 						{
 							this.View.InsertSubviewAbove (oView, this.MasterViewController.View);
@@ -1062,6 +1063,7 @@ namespace MTSplitViewLib
 						{
 							this.View.BringSubviewToFront (oView);
 						}
+						oController.ViewDidAppear ( false );
 					}
 				}
 			}
@@ -1144,6 +1146,7 @@ namespace MTSplitViewLib
 					if (oView != null)
 					{
 						oView.Frame = oDetailRect;
+						oController.ViewWillAppear ( false );
 						if (oView.Superview == null)
 						{
 							this.View.InsertSubviewAbove (oView, this.MasterViewController.View);
@@ -1152,6 +1155,7 @@ namespace MTSplitViewLib
 						{
 							this.View.BringSubviewToFront (oView);
 						}
+						oController.ViewDidAppear ( false );
 					}
 				}
 			}
