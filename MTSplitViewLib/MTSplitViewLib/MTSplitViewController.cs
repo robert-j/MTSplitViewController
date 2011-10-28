@@ -385,7 +385,7 @@ namespace MTSplitViewLib
 		/// <exception cref='ArgumentException'>
 		/// Is thrown when an argument passed to a method is invalid.
 		/// </exception>
-		public UIViewController[] ViewControllers
+		public virtual UIViewController[] ViewControllers
 		{
 			get
 			{
@@ -428,7 +428,7 @@ namespace MTSplitViewLib
 		/// <value>
 		/// The master view controller.
 		/// </value>
-		public UIViewController MasterViewController
+		public virtual UIViewController MasterViewController
 		{
 			get
 			{
@@ -451,9 +451,10 @@ namespace MTSplitViewLib
 					return;
 				}
 				
-				if(this.ViewControllers[0] != null)
+				// We need to remove the controller's view, otherwise it will float around as a zombie.
+				if(this.ViewControllers[0] != null && this.ViewControllers[0].View != null)
 				{
-					this.ViewControllers[0] .View.RemoveFromSuperview();
+					this.ViewControllers[0].View.RemoveFromSuperview();
 				}
 				
 				this.ViewControllers [0] = value;
@@ -467,7 +468,7 @@ namespace MTSplitViewLib
 		/// <value>
 		/// The detail view controller.
 		/// </value>
-		public UIViewController DetailViewController
+		public virtual UIViewController DetailViewController
 		{
 			get
 			{
@@ -488,6 +489,12 @@ namespace MTSplitViewLib
 				if (this.ViewControllers [1] == value)
 				{
 					return;
+				}
+				
+				// We need to remove the controller's view, otherwise it will float around as a zombie.
+				if ( this.ViewControllers [1] != null && this.ViewControllers[1].View != null )
+				{
+					this.ViewControllers [1].View.RemoveFromSuperview ();
 				}
 				
 				this.ViewControllers [1] = value;
@@ -1343,7 +1350,7 @@ namespace MTSplitViewLib
 		/// <summary>
 		/// Toggles the split orientation.
 		/// </summary>
-		public void ToggleSplitOrientation ()
+		public virtual void ToggleSplitOrientation ()
 		{
 			bool bShowingMaster = this.IsShowingMaster;
 			if (bShowingMaster)
@@ -1405,7 +1412,7 @@ namespace MTSplitViewLib
 		/// <summary>
 		/// Toggles the visibility of the master view.
 		/// </summary>
-		public void ToggleMasterView ()
+		public virtual void ToggleMasterView ()
 		{
 			if (this.HiddenPopoverController != null && this.HiddenPopoverController.PopoverVisible)
 			{
