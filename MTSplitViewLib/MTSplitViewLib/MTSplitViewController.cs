@@ -964,10 +964,6 @@ namespace MTSplitViewLib
 			float width = oFullSize.Width;
 			float height = oFullSize.Height;
 	
-#if DEBUG
-	Console.WriteLine("Target orientation is " + this.NameOfInterfaceOrientation(eOrientation) + " dimensions will be " + width + " x " + height );
-#endif
-			
 			// Layout the master, divider and detail views.
 			RectangleF eNewFrame = oMainRect;// new RectangleF (0, 0, width, height);
 			UIViewController oController;
