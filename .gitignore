@@ -1,5 +1,6 @@
 *.cs~
 *.pidb
+*.userprefs
 MTSplitViewLib/MTSplitViewLib/bin/Debug/MTSplitView.dll.mdb
 
 MTSplitViewLib/MTSplitViewLib/bin/Debug/MTSplitView.dll
