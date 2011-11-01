@@ -913,7 +913,7 @@ namespace MTSplitViewLib
 		
 		/// <summary>
 		/// Gets the rectangle that will be used to place the master and detail controller in for a sepcific orientation.
-		/// Takes care of status bar. You can override this if you don't want to use the full screen to be used for the split controller.
+		/// You can override this if you don't want to use the full screen to be used for the split controller.
 		/// </summary>
 		/// <returns>
 		/// The rectangle for the requested orientation.
@@ -923,32 +923,7 @@ namespace MTSplitViewLib
 		/// </param>
 		protected virtual RectangleF SplitViewRectangleForOrientation (UIInterfaceOrientation theOrientation)
 		{
-			RectangleF oFullScreenRect = UIScreen.MainScreen.Bounds; // always implicitly in Portrait orientation.
-			RectangleF oAppFrame = UIScreen.MainScreen.ApplicationFrame;
-	
-			// Find status bar height by checking which dimension of the applicationFrame is narrower than screen bounds.
-			// Little bit ugly looking, but it'll still work even if they change the status bar height in future.
-			float fStatusBarHeight = Math.Max ((oFullScreenRect.Width - oAppFrame.Width), (oFullScreenRect.Height - oAppFrame.Height));
-			
-			// Initially assume portrait orientation.
-			float fWidth = oFullScreenRect.Width;
-			float fHeight = oFullScreenRect.Height;
-	
-			// Correct for orientation.
-			if (theOrientation== UIInterfaceOrientation.LandscapeLeft || theOrientation == UIInterfaceOrientation.LandscapeRight)
-			{
-				fWidth = fHeight;
-				fHeight = oFullScreenRect.Width;
-			}
-	
-			// Account for status bar, which always subtracts from the height (since it's always at the top of the screen).
-			fHeight -= fStatusBarHeight;
-			
-			// Account for tab bar.
-			if (TabBarController != null)
-				fHeight -= TabBarController.TabBar.Frame.Height;
-	
-			return new RectangleF (0, 0, fWidth, fHeight);
+			return View.Bounds;
 		}
 		
 		/// <summary>
