@@ -95,6 +95,11 @@ namespace MTSplitViewLib
 		}
 		
 		/// <summary>
+		/// If TRUE, the controller provides a popover and a bar button item for the master controller if the master is hidden. Default is TRUE.
+		/// </summary>
+		public bool AutoProvidePopoverAndBarItem = true;
+		
+		/// <summary>
 		/// Gets or sets the bar button item used to present the master view controller from.
 		/// </summary>
 		/// <value>
@@ -965,7 +970,7 @@ namespace MTSplitViewLib
 			float height = oFullSize.Height;
 	
 #if DEBUG
-	Console.WriteLine("Target orientation is " + this.NameOfInterfaceOrientation(eOrientation) + " dimensions will be " + width + " x " + height );
+	//Console.WriteLine("Target orientation is " + this.NameOfInterfaceOrientation(eOrientation) + " dimensions will be " + width + " x " + height );
 #endif
 			
 			// Layout the master, divider and detail views.
@@ -1054,16 +1059,16 @@ namespace MTSplitViewLib
 					if (oView != null)
 					{
 						oView.Frame = oDetailRect;
-						oController.ViewWillAppear(false);
 						if (oView.Superview == null)
 						{
+							oController.ViewWillAppear(false);
 							this.View.InsertSubviewAbove (oView, this.MasterViewController.View);
+							oController.ViewDidAppear ( false );
 						}
 						else
 						{
 							this.View.BringSubviewToFront (oView);
 						}
-						oController.ViewDidAppear ( false );
 					}
 				}
 			}
@@ -1146,16 +1151,16 @@ namespace MTSplitViewLib
 					if (oView != null)
 					{
 						oView.Frame = oDetailRect;
-						oController.ViewWillAppear ( false );
 						if (oView.Superview == null)
 						{
+							oController.ViewWillAppear ( false );
 							this.View.InsertSubviewAbove (oView, this.MasterViewController.View);
+							oController.ViewDidAppear ( false );
 						}
 						else
 						{
 							this.View.BringSubviewToFront (oView);
 						}
-						oController.ViewDidAppear ( false );
 					}
 				}
 			}
@@ -1284,6 +1289,12 @@ namespace MTSplitViewLib
 		private void ReconfigureForMasterInPopover (bool bInPopover)
 		{
 			this.bReconfigurePopup = false;
+			
+			// Check if the user actually wants the master to be put into a popover.
+			if(!this.AutoProvidePopoverAndBarItem)
+			{
+				return;
+			}
 		
 			if ((bInPopover && this.HiddenPopoverController != null)
 			|| (!bInPopover && this.HiddenPopoverController == null) || this.MasterViewController == null)
@@ -1291,7 +1302,7 @@ namespace MTSplitViewLib
 				// Nothing to do.
 				return;
 			}
-		
+			
 			if (bInPopover && this.HiddenPopoverController == null && this.BarButtonItem == null)
 			{
 				// Create and configure popover for our masterViewController.
@@ -1305,7 +1316,7 @@ namespace MTSplitViewLib
 				this.HiddenPopoverController = new  UIPopoverController (this.MasterViewController);
 				this.MasterViewController.ViewDidDisappear (false);
 			
-				// Create and configure _barButtonItem.
+				// Create and configure UIBarButtonItem.
 				this.BarButtonItem = new UIBarButtonItem ("Master", UIBarButtonItemStyle.Bordered, this.ShowMasterPopover);
 			
 				// Inform delegate of this state of affairs.
