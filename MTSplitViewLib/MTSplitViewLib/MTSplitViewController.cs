@@ -759,8 +759,14 @@ namespace MTSplitViewLib
 			this.DividerView.BackgroundColor = MG_DEFAULT_CORNER_COLOR;
 			this.DividerStyle = MTSplitDividerView.DIVIDER_STYLE.Thin;
 		}
-		
+
+		[Obsolete]
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			return true;
+		}
+
+		public override bool ShouldAutorotate ()
 		{
 			return true;
 		}
@@ -870,8 +876,6 @@ namespace MTSplitViewLib
 			{
 				this.DetailViewController.ViewWillAppear (animated);
 			}	
-			this.bReconfigurePopup = true;
-			this.LayoutSubviews ();
 		}
 		
 		public override void ViewDidAppear (bool animated)
@@ -885,7 +889,9 @@ namespace MTSplitViewLib
 			if (this.DetailViewController != null)
 			{
 				this.DetailViewController.ViewDidAppear (animated);
-			}	
+			}
+			this.bReconfigurePopup = true;
+			this.LayoutSubviews ();
 		}
 
 		public override void ViewWillDisappear (bool animated)
