@@ -6,3 +6,4 @@ MTSplitViewLib/MTSplitViewLib/bin/Debug/MTSplitView.dll
 *.userprefs
 bin
 obj
+.DS_Store
